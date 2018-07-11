@@ -3,6 +3,7 @@ const path = require('path');
 const cors = require('cors');
 const request = require('request');
 const bodyParser = require('body-parser');
+
 const taskController = require('./controllers/taskController');
 const boardController = require('./controllers/boardController');
 const storyController = require('./controllers/storyController');
@@ -48,23 +49,23 @@ app.post('/logout', (req, res) => {
   });
 });
 
-app.post('/login', (req, res) => {
-  SimpleUser.find({ name: req.body.username, password: req.body.password }, (err, resMongo) => {
-    if (resMongo.length) {
-      const userData = resMongo[0];
-      SimpleUser.update(
-        { name: req.body.username, password: req.body.password },
-        { isLoggedIn: true },
-        (err, resMongo) => {
-          console.log(resMongo);
-          res.send(userData);
-        }
-      );
-    } else {
-      res.send({ error: 'username or password incorrect' });
-    }
-  });
-});
+// app.post('/login', (req, res) => {
+//   SimpleUser.find({ name: req.body.username, password: req.body.password }, (err, resMongo) => {
+//     if (resMongo.length) {
+//       const userData = resMongo[0];
+//       SimpleUser.update(
+//         { name: req.body.username, password: req.body.password },
+//         { isLoggedIn: true },
+//         (err, resMongo) => {
+//           console.log(resMongo);
+//           res.send(userData);
+//         }
+//       );
+//     } else {
+//       res.send({ error: 'username or password incorrect' });
+//     }
+//   });
+// });
 
 /// TASK ROUTES
 app.get('/tasks/id?:id', taskController.getTasks);

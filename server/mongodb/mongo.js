@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
-const uri = 'mongodb://scrum:scrum1@ds229701.mlab.com:29701/scrum';
+const uri = process.env.DATABASE_URL;
 
 const SimpleUserSchema = new mongoose.Schema({
   name: { type: String, required: true },
