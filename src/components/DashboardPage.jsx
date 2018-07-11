@@ -3,8 +3,8 @@ import React from 'react';
 import BoardList from './BoardList.jsx';
 import * as boardActions from '../actions/boards.js';
 import { connect } from 'react-redux';
-
 import Header from './Header.jsx';
+
 const mapDispatchToProps = dispatch => {
   return {
     addBoard: (name, userId) => dispatch(boardActions.addBoard(name, userId)),
@@ -33,7 +33,7 @@ class DashboardPage extends React.Component {
   render() {
     return (
       <div className="dashboard-page">
-        <Header match={this.props.match} history={this.props.history} />
+        {/* <Header match={this.props.match} history={this.props.history} /> */}
         <BoardList
           userID={this.props.match.params.id}
           history={this.props.history}

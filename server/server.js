@@ -2,31 +2,53 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const request = require('request');
+const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const taskController = require('./controllers/taskController');
 const boardController = require('./controllers/boardController');
 const storyController = require('./controllers/storyController');
+const userController = require('./controllers/userController');
 
-const { SimpleUser, User, fetchMongoData } = require('./mongo.js');
+// const passport = require('passport');
+
+const fetchMongoData = require('./mongo.js');
 
 const app = express();
 const port = process.env.PORT || 3000;
+// var index = require('./routes/index');
 const publicPath = path.join(__dirname, '..', 'public', 'dist');
 
-app.use(cors());
+var corsOption = {
+  origin: true,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  exposedHeaders: ['x-auth-token']
+};
+
+app.use(cors(corsOption));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(express.static(publicPath));
 
+// app.use('/api/v1/', index);
 
-// USER ROUTES
-app.get('/getusers', fetchMongoData, (req, res) => {
-  SimpleUser.find({}, (err, resMongo) => {
-    res.json(resMongo);
-  });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(publicPath, 'index.html'));
 });
 
-app.use(express.static(publicPath));
+
+app.listen(port, () => console.log(`server running on port ${port}`));
+
+// module.exports = app;
+// USER ROUTES
+// app.get('/getusers', fetchMongoData, (req, res) => {
+//   SimpleUser.find({}, (err, resMongo) => {
+//     res.json(resMongo);
+//   });
+// });
+
 app.post('/signup', (req, res) => {
   SimpleUser.find({ name: req.body.username }, (err, resMongo) => {
     if (resMongo.length) {
@@ -66,6 +88,8 @@ app.post('/login', (req, res) => {
   });
 });
 
+app.post('/authuser', userController.authenticateUser);
+
 /// TASK ROUTES
 app.get('/tasks/id?:id', taskController.getTasks);
 app.post('/tasks', taskController.addTask);
@@ -85,9 +109,3 @@ app.get('/boards/id?:id', boardController.getBoards);
 app.post('/boards', boardController.addBoard);
 app.delete('/boards', boardController.deleteBoard);
 app.get('/allboards', boardController.getAllBoards);
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(publicPath, 'index.html'));
-});
-
-app.listen(port, () => console.log(`server running on port ${port}`));

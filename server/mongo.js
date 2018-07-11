@@ -1,4 +1,7 @@
+'use strict';
+
 const mongoose = require('mongoose');
+var Schema = mongoose.Schema
 
 const uri = 'mongodb://scrum:scrum1@ds229701.mlab.com:29701/scrum';
 
