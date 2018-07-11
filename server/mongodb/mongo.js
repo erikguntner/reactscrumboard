@@ -1,5 +1,8 @@
+'use strict';
+
 const mongoose = require('mongoose');
 require('dotenv').config();
+var Schema = mongoose.Schema
 
 const uri = process.env.DATABASE_URL;
 

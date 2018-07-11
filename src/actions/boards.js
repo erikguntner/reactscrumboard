@@ -2,6 +2,7 @@ import * as types from '../constants/actionTypes.js';
 
 export function addBoard(name, userId) {
   return async function (dispatch, getState) {
+
     const state = getState();
     const boards = state.boards.slice();
 
@@ -20,6 +21,7 @@ export function addBoard(name, userId) {
     });
 
     const data = await response.json();
+    console.log(data);
     boards.push(data);
 
     return dispatch({
@@ -30,12 +32,14 @@ export function addBoard(name, userId) {
 }
 
 export function getBoards(userId) {
+
   return async function (dispatch, getState) {
     const state = getState();
     const boards = state.boards.slice();
 
     const response = await fetch(`http://localhost:3000/boards/id?id=${userId}`);
     const data = await response.json();
+    console.log(data);
 
     data.forEach(board => boards.push(board));
 
