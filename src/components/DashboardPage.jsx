@@ -3,7 +3,7 @@ import React from 'react';
 import BoardList from './BoardList.jsx';
 import * as boardActions from '../actions/boards.js';
 import { connect } from 'react-redux';
-import Header from './Header.jsx';
+// import Header from './Header.jsx'; 
 
 const mapDispatchToProps = dispatch => {
   return {

@@ -99,7 +99,7 @@ class Board extends React.Component {
     return (
       <div className="board">
         <div>
-          <Header match={this.props.match} history={this.props.history} />
+          {/* <Header match={this.props.match} history={this.props.history} /> */}
 
           <h1 style={{ textAlign: 'center' }}>Welcome To Your ScrumBoard</h1>
           <div>

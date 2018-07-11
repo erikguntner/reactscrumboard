@@ -16,7 +16,6 @@ class Authentication extends Component {
   };
 
   googleResponse = async (response) => {
-    console.log(response);
 
     const res = await fetch(`http://localhost:3000/authuser`, {
       method: 'POST',
@@ -26,7 +25,6 @@ class Authentication extends Component {
         'x-auth-token': `${response.tokenId}`
       }
     });
-
     const data = await res.json();
     console.log(data);
     this.props.history.push(`/test/${data.sub}`);

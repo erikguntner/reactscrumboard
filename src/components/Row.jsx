@@ -11,11 +11,6 @@ const Row = props => {
 
   return (
     <div className='row' style={{ border: '1px black' }}>
-      <GoogleLogout
-        buttonText="Logout"
-        onLogoutSuccess={logout}
-      >
-      </GoogleLogout>
       <div>
         <RowHeader columnHeader={props.columnHeader} />
         <RowBody isStory={props.isStory} tasks={props.tasks} boardId={props.boardId} />
