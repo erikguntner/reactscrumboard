@@ -4,7 +4,7 @@ const boardController = {
   getBoards: (req, res) => {
     Board.find({ userId: req.query.id }, (err, tasks) => {
       if (err) return console.error(err);
-    }).then(result => res.json(result));
+    }).then(result => res.json(result))
   },
 
   deleteBoard: (req, res) => {
@@ -22,6 +22,7 @@ const boardController = {
   },
 
   getAllBoards: (req, res) => {
+    console.log(res);
     Board.find({}, (err, tasks) => {
       if (err) return console.error(err);
     }).then(result => res.json(result));
