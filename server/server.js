@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
+require('dotenv').config();
 const mongoose = require("mongoose");
 
 const request = require('request');
@@ -11,7 +12,12 @@ const taskController = require('./controllers/taskController');
 const boardController = require('./controllers/boardController');
 const storyController = require('./controllers/storyController');
 const userController = require('./controllers/userController');
+const Router = require('express-promise-router');
+const router = new Router();
+router
 
+
+module.exports = router
 // const fetchMongoData = require('./mongo.js');
 
 const app = express();
@@ -39,6 +45,7 @@ app.get('*', (req, res) => {
 app.post('/authuser', userController.authenticateUser);
 
 /// TASK ROUTES
+
 app.get('/tasks/id?:id', taskController.getTasks);
 app.post('/tasks', taskController.addTask);
 app.post('/updatetasks', taskController.updateTask);
