@@ -25,7 +25,10 @@ class DashboardPage extends React.Component {
   }
 
   componentDidMount() {
+    console.log('component did mount');
+
     if (this.props.boards.length === 0) {
+      console.log('hello');
       this.props.getBoards(this.props.match.params.id);
     }
   }

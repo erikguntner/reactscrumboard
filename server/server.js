@@ -43,7 +43,6 @@ app.get('*', (req, res) => {
 
 
 app.post('/authuser', userController.authenticateUser);
-
 /// TASK ROUTES
 
 app.get('/tasks/id?:id', taskController.getTasks);
@@ -60,7 +59,7 @@ app.delete('/stories', storyController.deleteStory);
 app.get('/allstories', storyController.getAllStories);
 
 //BOARD ROUTES
-app.get('/boards/id?:id', boardController.getBoards);
+app.post('/boardsid', boardController.getBoards);
 app.post('/boards', boardController.addBoard);
 app.delete('/boards', boardController.deleteBoard);
 app.get('/allboards', boardController.getAllBoards);

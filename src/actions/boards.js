@@ -37,7 +37,14 @@ export function getBoards(userId) {
     const state = getState();
     const boards = state.boards.slice();
 
-    const response = await fetch(`http://localhost:3000/boards/id?id=${userId}`);
+    const response = await fetch(`http://localhost:3000/boardsid`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId: userId }),
+    });
     const data = await response.json();
     console.log(data);
 
