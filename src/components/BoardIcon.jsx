@@ -52,7 +52,7 @@ class BoardIcon extends React.Component {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   deleteBoard: boardId => {
-    dispatch(deleteBoard(boardId));
+    dispatch((boardId));
   },
 });
 
