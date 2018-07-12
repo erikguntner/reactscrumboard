@@ -1,7 +1,6 @@
 import React from 'react';
 import Row from './Row.jsx';
 
-
 import { connect } from 'react-redux';
 
 import { deleteBoard } from '../actions/boards.js';
@@ -50,10 +49,8 @@ class BoardIcon extends React.Component {
   }
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  deleteBoard: boardId => {
-    dispatch(deleteBoard(boardId));
-  },
+const mapDispatchToProps = (dispatch) => ({
+  deleteBoard: boardId => dispatch(deleteBoard(boardId)),
 });
 
 export default connect(
