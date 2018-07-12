@@ -10,8 +10,12 @@ const boardController = {
   },
 
   deleteBoard: (req, res) => {
-    console.log('delete boards body', req.body);
-    const query = `DELETE FROM board WHERE board_id=${req.body.board_id} RETURNING *`;
+    const query = `BEGIN;
+    DELETE FROM story WHERE board_id = ${req.body.board_id}; 
+    DELETE FROM task WHERE board_id = ${req.body.board_id};
+    DELETE FROM board WHERE board_id=${req.body.board_id} RETURNING *;
+    COMMIT;`;
+    //const query = `DELETE FROM board WHERE board_id=${req.body.board_id} RETURNING *`;
     db.query(query, '', (err, results) => {
       if (err) res.send(err);
       console.log(results);
@@ -32,7 +36,6 @@ const boardController = {
   },
 
   getAllBoards: (req, res) => {
-    console.log(res);
     Board.find({}, (err, tasks) => {
       if (err) return console.error(err);
     }).then(result => res.json(result));
