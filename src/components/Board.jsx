@@ -66,6 +66,8 @@ class Board extends React.Component {
     // load in all stories and tasks from database that relate to the current board
     await this.props.getStories(this.props.match.params.id);
     await this.props.getTasks(this.props.match.params.id);
+    console.log("props inside board", this.props);
+
     // Split tasks into arrays in statse representing the different columns
     const { stories } = this.props;
     const [todo, inProgress, testing, done] = this.props.tasks.reduce(

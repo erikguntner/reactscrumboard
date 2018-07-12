@@ -12,6 +12,7 @@ class Task extends React.Component {
   }
 
   render() {
+    console.log('task props', this.props)
     return (
       <div
         style={{
@@ -22,7 +23,7 @@ class Task extends React.Component {
       >
         <button
           className="delete button_clear--small"
-          onClick={() => this.props.deleteTask(this.props.task._id)}
+          onClick={() => this.props.deleteTask(this.props.task.task_id)}
         >
           X
         </button>

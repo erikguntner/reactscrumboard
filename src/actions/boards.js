@@ -59,14 +59,14 @@ export function getBoards(userId) {
 
 export function deleteBoard(boardId) {
   return async function (dispatch, getState) {
-    const boards = getState().boards.filter(board => board._id !== boardId);
+    const boards = getState().boards.filter(board => board.board_id !== boardId);
     const response = await fetch('http://localhost:3000/boards', {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ _id: boardId }),
+      body: JSON.stringify({ board_id: boardId }),
     });
 
     return dispatch({

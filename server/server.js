@@ -52,7 +52,7 @@ app.delete('/tasks', taskController.deleteTask);
 app.get('/alltasks', taskController.getAllTasks);
 
 /// STORY ROUTES
-app.get('/stories/id?:id', storyController.getStories);
+app.post('/storiesid', storyController.getStories);
 app.post('/stories', storyController.addStory);
 app.post('/updatestories', storyController.updateStory);
 app.delete('/stories', storyController.deleteStory);

@@ -5,10 +5,6 @@ import { GoogleLogout } from 'react-google-login';
 
 
 const Row = props => {
-  const logout = () => {
-    props.history.push(`/`);
-  }
-
   return (
     <div className='row' style={{ border: '1px black' }}>
       <div>

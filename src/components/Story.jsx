@@ -4,29 +4,30 @@ import { connect } from 'react-redux';
 import { updateStory, deleteStory } from '../actions/stories.js';
 
 const Task = props => {
+  console.log('stories', props.task);
   const order = ['todo', 'inProgress', 'testing', 'done'];
   return (
     <div
       style={{
         border: '2.5px solid black',
         padding: '4px 4px',
-        backgroundColor: props.task.done ? 'green' : 'red',
+        backgroundColor: props.task.completed ? 'green' : 'red',
         marginTop: '2px',
         marginBottom: '2px',
       }}
     >
       <button
         className="delete button_clear--small"
-        onClick={() => props.deleteTask(props.task._id)}
+        onClick={() => props.deleteStory(props.task.story_id)}
       >
         X
       </button>
-      <p>{props.name}</p>
+      <p>{props.task.task}</p>
       <span
         onClick={() => {
-          let { done } = props.task;
-          console.log('​done', done);
-          props.updateStory(props.task, { done: !done });
+          let { completed } = props.task;
+
+          props.updateStory(props.task, { completed: !completed });
         }}
       >
         Status
@@ -37,7 +38,7 @@ const Task = props => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   updateStory: (task, updates) => dispatch(updateStory(task, updates)),
-  deleteTask: taskId => dispatch(deleteStory(taskId)),
+  deleteStory: taskId => dispatch(deleteStory(taskId)),
 });
 
 export default connect(

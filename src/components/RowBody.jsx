@@ -18,27 +18,28 @@ class Body extends Component {
     this.setState(() => ({ tasks: nextProps.tasks }));
   }
   render() {
+    
     const tasks = this.state.tasks
       ? this.state.tasks.map(task => {
-          if (this.props.isStory) {
-            return (
-              <Story
-                task={task}
-                name={task.name}
-                key={task._id}
-                columnHeader={this.props.columnHeader}
-              />
-            );
-          }
+        if (this.props.isStory) {
           return (
-            <Task
+            <Story
               task={task}
               name={task.name}
-              key={task._id}
+              key={task.task_id}
               columnHeader={this.props.columnHeader}
             />
           );
-        })
+        }
+        return (
+          <Task
+            task={task}
+            name={task.name}
+            key={task.task_id}
+            columnHeader={this.props.columnHeader}
+          />
+        );
+      })
       : [];
     return (
       <div>

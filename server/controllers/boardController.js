@@ -11,10 +11,11 @@ const boardController = {
   },
 
   deleteBoard: (req, res) => {
-    const query = `DELETE  FROM board WHERE board_id =  ${req.query.id}`;
+    console.log(req.body);
+    const query = `DELETE FROM board WHERE board_id=${req.body.board_id} RETURNING *`;
     db.query(query, '', (err, results) => {
       if (err) res.send(err);
-      res.send(results.rows[0]);
+      res.json(results.rows);
     })
   },
 

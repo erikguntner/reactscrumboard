@@ -11,15 +11,20 @@ const taskController = {
   },
 
   deleteTask: (req, res) => {
-    Task.deleteOne({ _id: req.body._id }, (err, task) => {
-      if (err) return console.error(err);
-    }).then(result => res.json(result));
+    console.log(req.body);
+    const query = `DELETE FROM task WHERE task_id=${parseInt(req.body.task_id)} RETURNING *`;
+    db.query(query, '', (err, results) => {
+      if (err) res.send(err);
+      res.json(results.rows);
+    })
   },
 
   getTasks: (req, res) => {
-    Task.find({ boardId: req.query.id }, (err, tasks) => {
-      if (err) return console.error(err);
-    }).then(result => res.json(result));
+    const query = `SELECT * FROM task WHERE board_id=${parseInt(req.body.board_id)}`;
+    db.query(query, '', (err, results) => {
+      if (err) res.send(err);
+      res.json(results.rows);
+    })
   },
 
   addTask: (req, res) => {
