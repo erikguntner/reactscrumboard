@@ -10,6 +10,7 @@ const boardController = {
   },
 
   deleteBoard: (req, res) => {
+    console.log(req);
     const query = `BEGIN;
     DELETE FROM story WHERE board_id = ${req.body.board_id}; 
     DELETE FROM task WHERE board_id = ${req.body.board_id};
