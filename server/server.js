@@ -45,14 +45,14 @@ app.get('*', (req, res) => {
 app.post('/authuser', userController.authenticateUser);
 /// TASK ROUTES
 
-app.post('/tasks/id', taskController.getTasks);
+app.post('/tasksid', taskController.getTasks);
 app.post('/tasks', taskController.addTask);
 app.post('/updatetasks', taskController.updateTask);
 app.delete('/tasks', taskController.deleteTask);
 app.get('/alltasks', taskController.getAllTasks);
 
 /// STORY ROUTES
-app.get('/stories/id?:id', storyController.getStories);
+app.post('/storiesid', storyController.getStories);
 app.post('/stories', storyController.addStory);
 app.post('/updatestories', storyController.updateStory);
 app.delete('/stories', storyController.deleteStory);

@@ -21,6 +21,7 @@ export function addTask(name, boardId) {
     });
 
     const data = await response.json();
+    console.log(data);
     tasks.push(data);
 
     return dispatch({
@@ -51,7 +52,7 @@ export function getTasks(boardId) {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({board_id: boardId}),
+      body: JSON.stringify({ board_id: boardId }),
     });
     const data = await response.json();
     data.forEach(task => tasks.push(task));
@@ -98,8 +99,8 @@ export function updateTask(task, updates) {
 
 export function deleteTask(taskId) {
   return async function (dispatch, getState) {
-    const tasks = getState().tasks.filter(task => task._id !== taskId);
-
+    console.log(taskId);
+    const tasks = getState().tasks.filter(task => task.task_id !== taskId);
 
     const response = await fetch('http://localhost:3000/tasks', {
       method: 'DELETE',
@@ -107,7 +108,7 @@ export function deleteTask(taskId) {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ _id: taskId }),
+      body: JSON.stringify({ task_id: taskId }),
     });
 
     const data = await response.json();

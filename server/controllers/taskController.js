@@ -1,4 +1,6 @@
 const Task = require('../models/task');
+const db = require('../db/index.js');
+
 
 const taskController = {
 
@@ -9,7 +11,8 @@ const taskController = {
   },
 
   deleteTask: (req, res) => {
-    const query = `DELETE  FROM task WHERE task_id =  ${req.body.task_id}`;
+    console.log(req.body);
+    const query = `DELETE FROM task WHERE task_id=${parseInt(req.body.task_id)} RETURNING *`;
     db.query(query, '', (err, results) => {
       if (err) res.send(err);
       res.json(results.rows);
@@ -17,8 +20,7 @@ const taskController = {
   },
 
   getTasks: (req, res) => {
-    console.log('inside getboards', req.body.board_id);
-    const query = `SELECT * FROM task WHERE board_id=${req.body.board_id} RETURNING *`;
+    const query = `SELECT * FROM task WHERE board_id=${parseInt(req.body.board_id)}`;
     db.query(query, '', (err, results) => {
       if (err) res.send(err);
       res.json(results.rows);
@@ -27,6 +29,14 @@ const taskController = {
 
   addTask: (req, res) => {
 
+    const query = 'INSERT INTO task (name, board_id, status) VALUES($1, $2, $3) RETURNING *';
+    const values = [`${req.body.name}`, `${req.body.boardId}`, `${req.body.status}`];
+    db.query(query, values, (err, results) => {
+      if (err) console.log('THIS IS ERROR ', err);
+      else {
+        res.json(results.rows[0]);
+      }
+    });
   },
 
   updateTask: (req, res) => {

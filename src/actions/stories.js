@@ -1,14 +1,14 @@
 import * as types from '../constants/actionTypes';
 
-export function addStory(name, boardId) {
+export function addStory(task, board_id) {
   return async function (dispatch, getState) {
     const state = getState();
     const stories = state.stories.slice();
 
     const newStory = {
-      boardId,
-      name,
-      done: false,
+      board_id,
+      task,
+      completed: false,
     };
 
     const response = await fetch('http://localhost:3000/stories', {
@@ -45,7 +45,15 @@ export function getStories(boardId) {
     const state = getState();
     const stories = state.stories.slice();
 
-    const response = await fetch(`http://localhost:3000/stories/id?id=${boardId}`);
+    const response = await fetch('http://localhost:3000/storiesid', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ board_id: boardId }),
+    });
+
     const data = await response.json();
     data.forEach(story => stories.push(story));
 
@@ -85,15 +93,16 @@ export function updateStory(story, updates) {
 }
 
 export function deleteStory(storyId) {
+  console.log(storyId);
   return async function (dispatch, getState) {
-    const stories = getState().stories.filter(story => story._id !== storyId);
+    const stories = getState().stories.filter(story => story.story_id !== storyId);
     const response = await fetch('http://localhost:3000/stories', {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ _id: storyId }),
+      body: JSON.stringify({ story_id: storyId }),
     });
 
     const data = await response.json();
