@@ -6,6 +6,7 @@ const userController = {
       const data = await response.json();
       return res.json(data);
    }
+   
 }
 
 module.exports = userController;

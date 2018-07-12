@@ -26,7 +26,7 @@ class Authentication extends Component {
       }
     });
     const data = await res.json();
-    console.log(data);
+    console.log('this is data in authentication.jsx',data);
     this.props.history.push(`/test/${data.sub}`);
     // const res = await fetch(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${response.tokenId}`);
     // const data = await res.json();
