@@ -69,6 +69,16 @@ const boardController = {
       res.json(results.rows); //might throw error, will need to check what rows is. -Chris
     });
   },
+  acceptInvite: (req, res) => {
+    this.rejectInvite(req);
+    const queryAddPermissions = 'INSERT INTO permissions (board_id, user_id) VALUES ($1, $2)';
+    const values = [`${req.body.board_id}`, `${req.body.userId}`];
+    db.query(queryAddPermissions, values, (err, results) =>{
+        if (err) console.log('ERROR! ', err);
+      res.json(results.row);
+    });
+  },
+
 }
 
 module.exports = boardController;

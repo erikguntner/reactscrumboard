@@ -64,6 +64,10 @@ app.post('/boards', boardController.addBoard);
 app.delete('/boards', boardController.deleteBoard);
 //app.get('/allboards', boardController.getAllBoards);
 
+//INVITE ROUTES
+app.post('/sendInvite', boardController.sendInvite);
+app.delete('/rejectInvite', boardController.rejectInvite);
+app.post('/acceptInvite', boardController.acceptInvite);
 
 // USER ROUTES
 // app.get('/getusers', fetchMongoData, (req, res) => {
