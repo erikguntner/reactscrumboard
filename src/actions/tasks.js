@@ -45,7 +45,14 @@ export function getTasks(boardId) {
     const state = getState();
     const tasks = state.tasks.slice();
 
-    const response = await fetch(`http://localhost:3000/tasks/id?id=${boardId}`);
+    const response = await fetch('http://localhost:3000/tasksid', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({board_id: boardId}),
+    });
     const data = await response.json();
     data.forEach(task => tasks.push(task));
 

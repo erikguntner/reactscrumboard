@@ -9,24 +9,24 @@ const taskController = {
   },
 
   deleteTask: (req, res) => {
-    Task.deleteOne({ _id: req.body._id }, (err, task) => {
-      if (err) return console.error(err);
-    }).then(result => res.json(result));
+    const query = `DELETE  FROM task WHERE task_id =  ${req.body.task_id}`;
+    db.query(query, '', (err, results) => {
+      if (err) res.send(err);
+      res.json(results.rows);
+    })
   },
 
   getTasks: (req, res) => {
-    Task.find({ boardId: req.query.id }, (err, tasks) => {
-      if (err) return console.error(err);
-    }).then(result => res.json(result));
+    console.log('inside getboards', req.body.board_id);
+    const query = `SELECT * FROM task WHERE board_id=${req.body.board_id} RETURNING *`;
+    db.query(query, '', (err, results) => {
+      if (err) res.send(err);
+      res.json(results.rows);
+    })
   },
 
   addTask: (req, res) => {
-    Task.create({
-      boardId: req.body.boardId,
-      name: req.body.name,
-      status: req.body.status
-    }).then(result => res.json(result))
-      .catch(err => console.error(err));
+
   },
 
   updateTask: (req, res) => {

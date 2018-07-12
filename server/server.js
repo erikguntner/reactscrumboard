@@ -43,10 +43,9 @@ app.get('*', (req, res) => {
 
 
 app.post('/authuser', userController.authenticateUser);
-
 /// TASK ROUTES
 
-app.get('/tasks/id?:id', taskController.getTasks);
+app.post('/tasks/id', taskController.getTasks);
 app.post('/tasks', taskController.addTask);
 app.post('/updatetasks', taskController.updateTask);
 app.delete('/tasks', taskController.deleteTask);
@@ -60,7 +59,7 @@ app.delete('/stories', storyController.deleteStory);
 app.get('/allstories', storyController.getAllStories);
 
 //BOARD ROUTES
-app.get('/boards/id?:id', (err,res, next) => {console.log('boards/id? works!'); next()},boardController.getBoards);
+app.post('/boardsid', boardController.getBoards);
 app.post('/boards', boardController.addBoard);
 app.delete('/boards', boardController.deleteBoard);
 app.get('/allboards', boardController.getAllBoards);
