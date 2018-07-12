@@ -41,7 +41,7 @@ const BoardIcon = props => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   deleteBoard: boardId => {
-    dispatch(deleteBoard(boardId));
+    dispatch((boardId));
   },
 });
 

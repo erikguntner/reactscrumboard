@@ -62,7 +62,7 @@ app.get('/allstories', storyController.getAllStories);
 app.post('/boardsid', boardController.getBoards);
 app.post('/boards', boardController.addBoard);
 app.delete('/boards', boardController.deleteBoard);
-app.get('/allboards', boardController.getAllBoards);
+//app.get('/allboards', boardController.getAllBoards);
 
 
 // USER ROUTES
