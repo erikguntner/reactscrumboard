@@ -21,12 +21,7 @@ const taskController = {
   },
 
   addTask: (req, res) => {
-    Task.create({
-      boardId: req.body.boardId,
-      name: req.body.name,
-      status: req.body.status
-    }).then(result => res.json(result))
-      .catch(err => console.error(err));
+
   },
 
   updateTask: (req, res) => {
