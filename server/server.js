@@ -45,7 +45,7 @@ app.get('*', (req, res) => {
 app.post('/authuser', userController.authenticateUser);
 /// TASK ROUTES
 
-app.get('/tasks/id?:id', taskController.getTasks);
+app.post('/tasks/id', taskController.getTasks);
 app.post('/tasks', taskController.addTask);
 app.post('/updatetasks', taskController.updateTask);
 app.delete('/tasks', taskController.deleteTask);
