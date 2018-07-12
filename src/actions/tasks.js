@@ -21,6 +21,7 @@ export function addTask(name, boardId) {
     });
 
     const data = await response.json();
+    console.log(data);
     tasks.push(data);
 
     return dispatch({

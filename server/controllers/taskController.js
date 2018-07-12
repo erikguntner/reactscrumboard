@@ -1,4 +1,6 @@
 const Task = require('../models/task');
+const db = require('../db/index.js');
+
 
 const taskController = {
 
@@ -22,6 +24,14 @@ const taskController = {
 
   addTask: (req, res) => {
 
+    const query = 'INSERT INTO task (name, board_id, status) VALUES($1, $2, $3) RETURNING *';
+    const values = [`${req.body.name}`, `${req.body.boardId}`, `${req.body.status}`];
+    db.query(query, values, (err, results) => {
+      if (err) console.log('THIS IS ERROR ', err);
+      else {
+        res.json(results.rows[0]);
+      }
+    });
   },
 
   updateTask: (req, res) => {
