@@ -1,10 +1,8 @@
-const Board = require('../models/board');
+const db = require('../db/index.js');
 
 const boardController = {
   getBoards: (req, res) => {
-    Board.find({ userId: req.query.id }, (err, tasks) => {
-      if (err) return console.error(err);
-    }).then(result => res.json(result))
+
   },
 
   deleteBoard: (req, res) => {
@@ -14,11 +12,16 @@ const boardController = {
   },
 
   addBoard: (req, res) => {
-    Board.create({
-      userId: req.body.userId,
-      name: req.body.name
-    }).then(result => res.json(result))
-      .catch(err => console.error(err));
+    console.log(req.body);
+    const query = 'INSERT INTO board (user_id, title) VALUES($1, $2) RETURNING *';
+    const values = [`${req.body.userId}`, `${req.body.title}`];
+    db.query(query, values, (err, results) => {
+      if (err) console.log('THIS IS ERROR ', err);
+      else {
+        res.json(results.rows[0]);
+      }
+    });
+
   },
 
   getAllBoards: (req, res) => {
