@@ -2,8 +2,8 @@ const db = require('../db/index.js');
 
 const boardController = {
   getBoards: (req, res) => {
-    console.log(req.query);
-      const query = `SELECT * FROM board WHERE user_id =  ${req.query.id}`;
+    console.log('getboards is running!');
+      const query = `SELECT * FROM board WHERE user_id = ${res.query.id}`;
       db.query(query, '', (err, results) =>{
         if (err) res.send(err);
         res.json(results.rows[0]);

@@ -36,8 +36,9 @@ export function getBoards(userId) {
   return async function (dispatch, getState) {
     const state = getState();
     const boards = state.boards.slice();
-
+    console.log('action works');
     const response = await fetch(`http://localhost:3000/boards/id?id=${userId}`);
+    console.log('await just finished');
     const data = await response.json();
     console.log(data);
 

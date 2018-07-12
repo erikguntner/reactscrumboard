@@ -60,7 +60,7 @@ app.delete('/stories', storyController.deleteStory);
 app.get('/allstories', storyController.getAllStories);
 
 //BOARD ROUTES
-app.get('/boards/id?:id', boardController.getBoards);
+app.get('/boards/id?:id', (err,res, next) => {console.log('boards/id? works!'); next()},boardController.getBoards);
 app.post('/boards', boardController.addBoard);
 app.delete('/boards', boardController.deleteBoard);
 app.get('/allboards', boardController.getAllBoards);
