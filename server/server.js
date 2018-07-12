@@ -13,11 +13,8 @@ const boardController = require('./controllers/boardController');
 const storyController = require('./controllers/storyController');
 const userController = require('./controllers/userController');
 const Router = require('express-promise-router');
-const router = new Router();
-router
+// const router = new Router();
 
-
-module.exports = router
 // const fetchMongoData = require('./mongo.js');
 
 const app = express();
@@ -37,14 +34,8 @@ app.use(express.static(publicPath));
 
 app.listen(port, () => console.log(`server running on port ${port}`));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(publicPath, 'index.html'));
-});
 
-
-app.post('/authuser', userController.authenticateUser);
 /// TASK ROUTES
-
 app.post('/tasksid', taskController.getTasks);
 app.post('/tasks', taskController.addTask);
 app.post('/updatetasks', taskController.updateTask);
@@ -64,10 +55,21 @@ app.post('/boards', boardController.addBoard);
 app.delete('/boards', boardController.deleteBoard);
 //app.get('/allboards', boardController.getAllBoards);
 
-//INVITE ROUTES
+//INVITES ROUTES
 app.post('/sendInvite', boardController.sendInvite);
-app.delete('/rejectInvite', boardController.rejectInvite);
 app.post('/acceptInvite', boardController.acceptInvite);
+app.delete('/rejectInvite', boardController.rejectInvite);
+
+// USER ROUTES
+app.post('/authuser', userController.authenticateUser);
+app.get('/getusers', (req, res, next) => {
+  console.log('got here')
+  next()
+}, userController.getUsers);
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(publicPath, 'index.html'));
+});
 
 // USER ROUTES
 // app.get('/getusers', fetchMongoData, (req, res) => {

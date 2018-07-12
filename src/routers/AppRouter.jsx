@@ -27,7 +27,6 @@ export default class AppRouter extends Component {
             <Route exact path="/authentication" component={Authentication} />
             <Route exact path="/test/:id" component={DashboardPage} />
             <Route exact path="/test/:id/:board" component={Board} />
-            <Route exact path="*" component={NotFoundPage} />
           </Switch>
         </div>
       </Router>

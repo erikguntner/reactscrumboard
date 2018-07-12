@@ -16,7 +16,7 @@ const boardController = {
   },
 
   deleteBoard: (req, res) => {
-    console.log('inse of deleteBoard ',req.body);
+    console.log('inside of deleteBoard ',req.body);
     const query = `BEGIN;
     DELETE FROM story WHERE board_id = ${req.body.board_id}; 
     DELETE FROM task WHERE board_id = ${req.body.board_id};
@@ -27,6 +27,7 @@ const boardController = {
     //const query = `DELETE FROM board WHERE board_id=${req.body.board_id} RETURNING *`;
     db.query(query, '', (err, results) => {
       if (err) res.send(err);
+      console.log(results);
       res.json(results.rows);
     })
   },

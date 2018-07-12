@@ -87,7 +87,7 @@ export function updateTask(task, updates) {
     console.log('returnedtask', data);
 
     const tasks = getState().tasks.map(x => {
-      if (x._id !== task._id) return x;
+      if (x.task_id !== task.task_id) return x;
       return updatedTask;
     });
     return dispatch({

@@ -81,7 +81,7 @@ export function updateStory(story, updates) {
     });
 
     const stories = getState().stories.map(x => {
-      if (x._id !== story._id) return x;
+      if (x.story_id !== story.story_id) return x;
       return updatedStory;
     });
 
