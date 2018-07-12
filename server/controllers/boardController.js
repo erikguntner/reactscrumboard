@@ -2,13 +2,20 @@ const db = require('../db/index.js');
 
 const boardController = {
   getBoards: (req, res) => {
-
-  },
+    console.log(req.query);
+      const query = `SELECT * FROM board WHERE user_id =  ${req.query.id}`;
+      db.query(query, '', (err, results) =>{
+        if (err) res.send(err);
+        res.json(results.rows[0]);
+      })
+      },
 
   deleteBoard: (req, res) => {
-    Board.deleteOne({ _id: req.body._id }, (err, task) => {
-      if (err) return console.error(err);
-    }).then(result => res.json(result));
+    const query = `DELETE  FROM board WHERE board_id =  ${req.query.id}`;
+      db.query(query, '', (err, results) =>{
+        if (err) res.send(err);
+        res.send(results.rows[0]);
+      })
   },
 
   addBoard: (req, res) => {

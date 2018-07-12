@@ -20,7 +20,7 @@ const storyController = {
       done: req.body.done,
     })
       .then(result => res.json(result))
-      .catch(err => console.error(err));  
+      .catch(err => console.error(err));
   },
 
   deleteStory: (req, res) => {
