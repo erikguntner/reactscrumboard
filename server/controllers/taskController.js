@@ -40,9 +40,14 @@ const taskController = {
   },
 
   updateTask: (req, res) => {
-    Task.findOneAndUpdate({ _id: req.body._id }, { status: req.body.status }, { new: true }, (err, task) => {
-      if (err) return console.error(err);
-    }).then(result => res.json(result));
+    console.log(req.body);
+    const query = `UPDATE task SET status = '${req.body.status}' WHERE task_id = ${req.body.task_id}`
+    db.query(query, '', (err, results) => {
+      if (err) console.log('QUERY ERROR', err);
+      else {
+        res.json(results.rows);
+      }
+    })
   }
 }
 

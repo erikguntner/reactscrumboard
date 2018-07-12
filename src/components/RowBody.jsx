@@ -18,7 +18,7 @@ class Body extends Component {
     this.setState(() => ({ tasks: nextProps.tasks }));
   }
   render() {
-    
+
     const tasks = this.state.tasks
       ? this.state.tasks.map(task => {
         if (this.props.isStory) {

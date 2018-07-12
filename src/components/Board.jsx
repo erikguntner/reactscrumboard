@@ -1,10 +1,13 @@
 import React from 'react';
 import Row from './Row.jsx';
-
+import Modal from 'react-modal';
+import User from './User.jsx';
 import Header from './Header.jsx';
 import * as taskActions from '../actions/tasks.js';
 import * as storyActions from '../actions/stories.js';
 import { connect } from 'react-redux';
+
+import 'babel-polyfill';
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -30,6 +33,8 @@ class Board extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTaskChange = this.handleTaskChange.bind(this);
     this.handleStoryChange = this.handleStoryChange.bind(this);
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
 
     this.state = {
       taskValue: '',
@@ -39,7 +44,20 @@ class Board extends React.Component {
       inProgress: [],
       testing: [],
       done: [],
+      showModal: false,
+      users: []
     };
+  }
+
+  handleOpenModal() {
+    console.log('in handle modal');
+    fetch('http://localhost:3000/getusers')
+      .then(res => res.json())
+      .then(data => this.setState({ users: data, showModal: true }));
+  }
+
+  handleCloseModal() {
+    this.setState({ showModal: false });
   }
 
   componentWillMount() {
@@ -47,6 +65,7 @@ class Board extends React.Component {
     this.props.clearStories(this.props.stories);
     this.props.clearTasks(this.props.tasks);
   }
+
   componentWillReceiveProps(nextProps) {
     // Does the same as Component Did Mount, but in order to modify the arrays after state is changedthis needed to be added
     const { stories, tasks } = nextProps;
@@ -80,6 +99,7 @@ class Board extends React.Component {
       },
       [[], [], [], []]
     );
+
     this.setState({ stories, todo, inProgress, testing, done });
   }
   handleSubmit(e) {
@@ -106,6 +126,17 @@ class Board extends React.Component {
           <h1 style={{ textAlign: 'center' }}>Welcome To Your ScrumBoard</h1>
           <div>
             <h1>Build Your Board</h1>
+            <button onClick={() => this.handleOpenModal()}>
+              InviteUser
+            </button>
+            <Modal
+              ariaHideApp={false}
+              isOpen={this.state.showModal}
+              contentLabel="Minimal Modal Example"
+            >
+              <button onClick={this.handleCloseModal}>Close Modal</button>
+              {this.state.users.map(user => <User name={user.google_name} picture={user.picture} />)}
+            </Modal>
             <div className="board-forms">
               <form onSubmit={this.handleSubmit}>
                 <input
