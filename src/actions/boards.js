@@ -8,7 +8,7 @@ export function addBoard(name, userId) {
 
     const newBoard = {
       userId,
-      name,
+      title: name,
     };
 
     const response = await fetch('http://localhost:3000/boards', {
@@ -21,7 +21,7 @@ export function addBoard(name, userId) {
     });
 
     const data = await response.json();
-    console.log(data);
+    console.log('returned data', data);
     boards.push(data);
 
     return dispatch({

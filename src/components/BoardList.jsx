@@ -20,9 +20,9 @@ class BoardList extends React.Component {
       <BoardIcon
         history={this.props.history}
         userID={this.props.userID}
-        boardId={board._id}
-        name={board.name}
-        key={board._id}
+        boardId={board.board_id}
+        name={board.title}
+        key={board.board_id}
       />
     ));
 
