@@ -29,11 +29,9 @@ const userController = {
                     const findUser = `SELECT * FROM users WHERE google_id = '${data.sub}'`;
                     db.query(findUser, '', (err, results) =>{
                         console.log('this is results ',results.rows);
-                        //res.send(results.rows[0]);
+                        res.send(results.rows[0]);
                     });
-                    //res.send(results.rows[0]);
                 }
-                //res.send(results.rows[0]);
             })
         }
         
