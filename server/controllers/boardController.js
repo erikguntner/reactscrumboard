@@ -21,7 +21,7 @@ const boardController = {
     DELETE FROM story WHERE board_id = ${req.body.board_id}; 
     DELETE FROM task WHERE board_id = ${req.body.board_id};
     DELETE FROM permissions WHERE board_id= ${req.body.board_id};
-    DELETE FROM invites WHERE board_id= ${React.body.board_id};
+    DELETE FROM invites WHERE board_id= ${req.body.board_id};
     DELETE FROM board WHERE board_id=${req.body.board_id};
     COMMIT;`;
     //const query = `DELETE FROM board WHERE board_id=${req.body.board_id} RETURNING *`;
