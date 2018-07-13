@@ -59,6 +59,7 @@ export function getBoards(userId) {
 
 export function deleteBoard(boardId) {
   return async function (dispatch, getState) {
+    console.log('I am running in deleteBoard action');
     const boards = getState().boards.filter(board => board.board_id !== boardId);
     const response = await fetch('http://localhost:3000/boards', {
       method: 'DELETE',

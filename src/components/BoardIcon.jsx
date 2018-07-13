@@ -49,9 +49,11 @@ class BoardIcon extends React.Component {
   }
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  deleteBoard: boardId => dispatch(deleteBoard(boardId)),
-});
+const mapDispatchToProps = dispatch => {
+  return {
+    deleteBoard: boardId => dispatch(deleteBoard(boardId))
+  }
+};
 
 export default connect(
   undefined,

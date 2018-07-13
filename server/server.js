@@ -53,7 +53,12 @@ app.get('/allstories', storyController.getAllStories);
 app.post('/boardsid', boardController.getBoards);
 app.post('/boards', boardController.addBoard);
 app.delete('/boards', boardController.deleteBoard);
-app.get('/allboards', boardController.getAllBoards);
+//app.get('/allboards', boardController.getAllBoards);
+
+//INVITES ROUTES
+app.post('/sendInvite', boardController.sendInvite);
+app.post('/acceptInvite', boardController.acceptInvite);
+app.delete('/rejectInvite', boardController.rejectInvite);
 
 // USER ROUTES
 app.post('/authuser', userController.authenticateUser);
