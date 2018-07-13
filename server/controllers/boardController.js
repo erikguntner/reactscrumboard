@@ -16,7 +16,7 @@ const boardController = {
   },
 
   deleteBoard: (req, res) => {
-    console.log('inside of deleteBoard ',req.body);
+    console.log('inside of deleteBoard ', req.body);
     const query = `BEGIN;
     DELETE FROM story WHERE board_id = ${req.body.board_id}; 
     DELETE FROM task WHERE board_id = ${req.body.board_id};
@@ -39,12 +39,12 @@ const boardController = {
     db.query(query, values, (err, results) => {
       if (err) console.log('THIS IS ERROR ', err);
       else {
-        console.log('I am in addboard',results.rows[0]);
+        console.log('I am in addboard', results.rows[0]);
         const innerQuery = 'INSERT INTO permissions (board_id, user_id) VALUES ($1, $2) RETURNING *';
         const innerVals = [`${results.rows[0].board_id}`, `${req.body.userId}`];
-        db.query(innerQuery, innerVals , (err, innerResults)=>{
+        db.query(innerQuery, innerVals, (err, innerResults) => {
           if (err) console.log('This is ERROR: ', err);
-        
+
         });
 
         res.json(results.rows[0]);
@@ -53,10 +53,11 @@ const boardController = {
 
   },
 
-  sendInvite:  (req, res) => {
+  sendInvite: (req, res) => {
+    console.log(req.body);
     const query = `INSERT INTO invites (board_id, user_id) VALUES ($1, $2) RETURNING *`;
-    const values = `[${req.body.board_id}, ${req.body.userId}]`;
-    db.query( query, values, (err, results) =>{
+    const values = [`${parseInt(req.body.board_id)}`, `${req.body.user_id}`];
+    db.query(query, values, (err, results) => {
       if (err) return err;
       res.json(results.rows[0]);
     });
@@ -65,7 +66,7 @@ const boardController = {
   rejectInvite: (req, res) => {
 
     const query = `DELETE FROM invites WHERE board_id =${req.body.board_id} AND user_id = ${req.body.userId}`;
-    db.query( query, '', (err, results) =>{
+    db.query(query, '', (err, results) => {
       if (err) return err;
       res.json(results.rows); //might throw error, will need to check what rows is. -Chris
     });
@@ -74,8 +75,8 @@ const boardController = {
     this.rejectInvite(req);
     const queryAddPermissions = 'INSERT INTO permissions (board_id, user_id) VALUES ($1, $2)';
     const values = [`${req.body.board_id}`, `${req.body.userId}`];
-    db.query(queryAddPermissions, values, (err, results) =>{
-        if (err) console.log('ERROR! ', err);
+    db.query(queryAddPermissions, values, (err, results) => {
+      if (err) console.log('ERROR! ', err);
       res.json(results.row);
     });
   },
