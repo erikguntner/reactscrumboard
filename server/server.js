@@ -12,6 +12,8 @@ const taskController = require('./controllers/taskController');
 const boardController = require('./controllers/boardController');
 const storyController = require('./controllers/storyController');
 const userController = require('./controllers/userController');
+const invitesController = require('./controllers/invitesController');
+
 const Router = require('express-promise-router');
 // const router = new Router();
 
@@ -59,6 +61,7 @@ app.delete('/boards', boardController.deleteBoard);
 app.post('/sendInvite', boardController.sendInvite);
 app.post('/acceptInvite', boardController.acceptInvite);
 app.delete('/rejectInvite', boardController.rejectInvite);
+app.post('/getinvites', invitesController.getInvites);
 
 // USER ROUTES
 app.post('/authuser', userController.authenticateUser);
